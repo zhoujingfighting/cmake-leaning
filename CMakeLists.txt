@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
-project(cmake_learning)
+project(cmake_learning VERSION 4.5)
 set(CMAKE_CXX_STANDARD 11)
 configure_file(main.h.in ${PROJECT_SOURCE_DIR}/include/main.h)
-message("" ${PROJECT_SOURCE_DIR} )
+message(">>>>"${cmake_learning_VERSION_MINOR}"<<<<<"${cmake_learning_VERSION_MAJOR})
 set(ROOT ${PROJECT_SOURCE_DIR})
 # need to speciific project name, hence we can get PROJECT_source_dir
 
