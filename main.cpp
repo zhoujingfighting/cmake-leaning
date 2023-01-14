@@ -1,6 +1,6 @@
 #include <iostream>
 #include "sharedspice.h"
-#include "test.h"
+#include "test/test.h"
 using namespace std;
 int add(int a, int b) { 
   return a + b;
