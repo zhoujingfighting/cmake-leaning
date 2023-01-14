@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(cmake_learning)
-set(CMAKE_CXX_STANDARD 20)
-
+set(CMAKE_CXX_STANDARD 11)
+configure_file(main.h.in ${PROJECT_SOURCE_DIR}/include/main.h)
 message("" ${PROJECT_SOURCE_DIR} )
 set(ROOT ${PROJECT_SOURCE_DIR})
 # need to speciific project name, hence we can get PROJECT_source_dir
@@ -21,17 +21,24 @@ set(
   main.cpp
 )
 
-add_subdirectory(src/test)
-link_libraries(arith)
+#  ADD optional args for this program
+option(USE_CUMSTOMIZED_LIB "use our customized libraries" on)
+if(USE_CUMSTOMIZED_LIB)
+  add_subdirectory(src/test)
+  list(APPEND EATRA_LIBS arith)
+  list(APPEND EXTRA_INCLUDES ${PROJECT_SOURCE_DIR}/src)
+endif(USE_CUMSTOMIZED_LIB)
+
 add_executable(
   test
   ${SOURCE_FILES}
 )
 
+target_link_libraries(test PUBLIC ${EATRA_LIBS})
 # specify all the header files for the root whole project
 target_include_directories(
   test
   PUBLIC
   ${PROJECT_SOURCE_DIR}/include
-  ${PROJECT_SOURCE_DIR}/src
+  ${EXTRA_INCLUDES}
 )
