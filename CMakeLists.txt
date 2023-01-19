@@ -1,8 +1,16 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.14)
 project(cmake_learning VERSION 4.5)
+
+# determine which compiler our system is currently using to build
+set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
+set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
 
 add_library(lib_flags INTERFACE)
 target_compile_features(lib_flags INTERFACE cxx_std_17)
+target_compile_options(lib_flags INTERFACE
+"$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
+"$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
+)
 
 configure_file(main.h.in ${PROJECT_SOURCE_DIR}/include/main.h)
 message(">>>>"${cmake_learning_VERSION_MINOR}"<<<<<"${cmake_learning_VERSION_MAJOR})
