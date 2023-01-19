@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
 project(cmake_learning VERSION 4.5)
-set(CMAKE_CXX_STANDARD 11)
+
+add_library(lib_flags INTERFACE)
+target_compile_features(lib_flags INTERFACE cxx_std_17)
+
 configure_file(main.h.in ${PROJECT_SOURCE_DIR}/include/main.h)
 message(">>>>"${cmake_learning_VERSION_MINOR}"<<<<<"${cmake_learning_VERSION_MAJOR})
 set(ROOT ${PROJECT_SOURCE_DIR})
@@ -33,7 +36,7 @@ add_executable(
   ${SOURCE_FILES}
 )
 
-target_link_libraries(test PUBLIC ${EATRA_LIBS})
+target_link_libraries(test PUBLIC ${EATRA_LIBS} lib_flags)
 # specify all the header files for the root whole project
 target_include_directories(
   test
