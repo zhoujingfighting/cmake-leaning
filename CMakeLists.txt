@@ -26,7 +26,6 @@ option(USE_CUMSTOMIZED_LIB "use our customized libraries" on)
 if(USE_CUMSTOMIZED_LIB)
   add_subdirectory(src/test)
   list(APPEND EATRA_LIBS arith)
-  list(APPEND EXTRA_INCLUDES ${PROJECT_SOURCE_DIR}/src)
 endif(USE_CUMSTOMIZED_LIB)
 
 add_executable(
@@ -38,7 +37,6 @@ target_link_libraries(test PUBLIC ${EATRA_LIBS})
 # specify all the header files for the root whole project
 target_include_directories(
   test
-  PUBLIC
+  PUBLIC 
   ${PROJECT_SOURCE_DIR}/include
-  ${EXTRA_INCLUDES}
 )

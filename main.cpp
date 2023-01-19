@@ -3,7 +3,7 @@
 #include <iostream>
 #include "main.h"
 #if defined(USE_CUMSTOMIZED_LIB)
-#include "test/test.h"
+#include "test.h"
 #endif
 using namespace std;
 int add(int a, int b) { return a + b; }
