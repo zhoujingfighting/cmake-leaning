@@ -12,7 +12,7 @@ target_compile_options(lib_flags INTERFACE
 "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
 )
 
-message(">>>>"${cmake_learning_VERSION_MINOR}"<<<<<"${cmake_learning_VERSION_MAJOR})
+message(">>>>" ${cmake_learning_VERSION_MINOR} "<<<<<" ${cmake_learning_VERSION_MAJOR})
 configure_file(main.h.in ${PROJECT_SOURCE_DIR}/include/main.h)
 
 set(ROOT ${PROJECT_SOURCE_DIR})
@@ -29,11 +29,7 @@ endif()
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
 
-
-set(
-  SOURCE_FILES
-  main.cpp
-)
+file(GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 #  ADD optional args for this program
 option(USE_CUMSTOMIZED_LIB "use our customized libraries" OFF)
@@ -42,8 +38,7 @@ if(USE_CUMSTOMIZED_LIB)
   list(APPEND EATRA_LIBS arith)
 endif(USE_CUMSTOMIZED_LIB)
 
-add_subdirectory(src/find-package)
-
+add_subdirectory(src/test)
 add_executable(
   test
   ${SOURCE_FILES}
